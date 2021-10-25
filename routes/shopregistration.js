@@ -7,12 +7,13 @@ const { registerController,
     productController,
     listProductsController } = require('../modules/controller')
 
+const { profileDataService } = require('../middleware/middlewares')
 
 router.post('/ownerRegister', registerController);
 
 router.post('/login', loginController);
 
-router.post('/employeeRegistration', employeeController);
+router.post('/employeeRegistration', profileDataService, employeeController);
 
 router.post('/addProduct', profileDataService, productController);
 

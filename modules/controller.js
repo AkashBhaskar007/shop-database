@@ -2,10 +2,9 @@ require('dotenv').config()
 const { ownerDetails,
     createOwner,
     ownerLoginService,
-    profileDataService,
     createProduct,
     showProductService } = require('./service')
-const Owner = require('../models/owner')
+const { profileDataService } = require('../middleware/middlewares')
 
 exports.registerController = async (req, res) => {
     let { fullName, email, role, userName, password } = req.body;
@@ -44,9 +43,7 @@ exports.loginController = async (req, res) => {
 
 
 exports.employeeController = async (req, res) => {
-    let token = req.headers.authorization;
-    const profileData = await profileDataService(token)
-    if (profileData.role == "owner") {
+    if (req.user.role == "owner") {
         let { fullName, email, role, userName, password } = req.body;
         if (!fullName || !email || !role || !userName || !password) {
             return res.status(400).json({ message: "All fields have not been entered!" })
@@ -68,7 +65,7 @@ exports.employeeController = async (req, res) => {
     })
 }
 exports.productController = async (req, res) => {
-       if (req.user.role == "employee") {
+    if (req.user.role == "employee") {
         let { productName,
             productDescription,
             price } = req.body;

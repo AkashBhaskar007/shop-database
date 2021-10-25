@@ -1,6 +1,5 @@
 const Owner = require('../models/owner')
 const Product = require('../models/product')
-
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -44,16 +43,7 @@ exports.ownerLoginService = async (userName, password) => {
         } return false;
     }
 }
-exports.profileDataService = async (req, res, next) => {
-    let token = req.headers.authorization;
-    if (!token)
-        return res.json({ message: "Token is missing!" })
 
-    const decoded = await jwt.verify(token, process.env.SECRET);
-    req.user=decoded;
-    console.log('decoded', decoded);
-    next();
-}
 exports.createProduct = async (params) => {
     let { productName,
         productDescription,
