@@ -4,7 +4,6 @@ const { ownerDetails,
     ownerLoginService,
     createProduct,
     showProductService } = require('./service')
-const { profileDataService } = require('../middleware/middlewares')
 
 exports.registerController = async (req, res) => {
     let { fullName, email, role, userName, password } = req.body;

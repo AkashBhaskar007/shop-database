@@ -7,8 +7,11 @@ require('dotenv').config()
 require('./dbconfig/mongoconfig');
 
 const shopregistration = require('./routes/shopregistration');
+const axioslist = require('./routes/axioslist');
 
 app.use('/shopRegistration', shopregistration)
+app.use('/axiosList', axioslist)
+
 
 app.listen(process.env.PORT, (err) => {
     if (err) {
