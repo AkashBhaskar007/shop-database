@@ -59,7 +59,7 @@ exports.createProduct = async (params) => {
 }
 exports.showProductService = async () => {
     const product = await Product.find();
-    if (!product)
+    if (product=="")
         return false;
     return product;
 }
